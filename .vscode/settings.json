@@ -1,0 +1,6 @@
+{
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.jdt.ls.java.home": null,
+  "java.compile.nullAnalysis.mode": "automatic",
+  "editor.formatOnSave": false
+}

@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "PayAfrica Marketplace V2 Backend",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/backend",
+      "mainClass": "com.payafrica.PayAfricaMarketplaceApplication",
+      "projectName": "payafrica-marketplace",
+      "vmArgs": "-Dspring.profiles.active=dev",
+      "console": "integratedTerminal"
+    }
+  ]
+}

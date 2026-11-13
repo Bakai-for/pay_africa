@@ -1,0 +1,53 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    url: "${SPRING_DATASOURCE_URL:jdbc:h2:mem:payafrica_market}"
+    driver-class-name: "${SPRING_DATASOURCE_DRIVER:org.h2.Driver}"
+    username: "${SPRING_DATASOURCE_USERNAME:sa}"
+    password: "${SPRING_DATASOURCE_PASSWORD:}"
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate.format_sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  jackson:
+    serialization.write-dates-as-timestamps: false
+    deserialization.fail-on-unknown-properties: false
+app:
+  jwt:
+    secret: "${JWT_SECRET:payafrica-marketplace-super-secret-32chars-minimum-for-dev-12345}"
+    expiration-ms: 86400000
+  cors-allowed-origins: "${CORS_ORIGINS:http://localhost:5173,http://localhost:3000,https://5173-iek1s3ehz3b12jpyhwrx0.e2b.app}"
+  payments:
+    mock: "${MOCK_PAYMENTS:true}"
+    retry-max: 3
+    timeout-ms: 10000
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+  datasource:
+    url: "${SPRING_DATASOURCE_URL:jdbc:postgresql://postgres:5432/payafrica_market}"
+    driver-class-name: org.postgresql.Driver
+    username: "${SPRING_DATASOURCE_USERNAME:payafrica}"
+    password: "${SPRING_DATASOURCE_PASSWORD:payafrica123}"
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 5000
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+springdoc:
+  api-docs.path: /api-docs
+  swagger-ui.path: /swagger-ui.html
+logging.level.com.payafrica: DEBUG
